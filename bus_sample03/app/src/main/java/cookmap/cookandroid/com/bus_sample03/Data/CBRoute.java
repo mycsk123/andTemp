@@ -1,10 +1,12 @@
 package cookmap.cookandroid.com.bus_sample03.Data;
 
+import java.io.Serializable;
+
 /**
  * Created by 8 on 2017-08-28.
  */
 
-public class CBRoute {
+public class CBRoute implements Serializable {
     private String arsNo; //정류소 번호
     private String avgtm; //평균시간
     private String bstopIdx; //노선 정류소 순번

@@ -107,12 +107,13 @@ public class XmlPBRoute {
                     }
                 }else {
                     if (eventType == XmlPullParser.TEXT) {
+
                         if (is_arsNo) {
                             isAction = true;
 
                             arsNo = xpp.getText();
                             routeList.add(new CBRoute());
-                            routeList.get(routeList.size() - 1)arsNo = arsNo;
+                            routeList.get(routeList.size() - 1).setArsNo(arsNo);
 
                             is_arsNo = false;
                         }

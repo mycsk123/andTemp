@@ -8,15 +8,18 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
+import cookmap.cookandroid.com.bus_sample03.BStopPlace.BStopPlace;
 import cookmap.cookandroid.com.bus_sample03.Data.CBInfo;
+import cookmap.cookandroid.com.bus_sample03.Data.CBRoute;
 import cookmap.cookandroid.com.bus_sample03.R;
 import cookmap.cookandroid.com.bus_sample03.XMLParser.NetworkGet;
 
 public class BRouteResult extends AppCompatActivity {
     CBInfo bi;
     ListView listView;
-    private CuA_BStopR adapter;
+    private CA_BRouteResult adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,22 +30,22 @@ public class BRouteResult extends AppCompatActivity {
         bi = (CBInfo) intent.getSerializableExtra("selectBusNumber");
 
         listView = (ListView)findViewById(R.id.bnr_listView);
-        adapter = new CuA_BStopR(this, R.layout.adapter_busroute, new ArrayList<BusByRoute>());
+        adapter = new CA_BRouteResult(this, R.layout.ca_brouteresult, new ArrayList<CBRoute>());
         listView.setAdapter(adapter);
 
-        new NetworkGet((CuA_BStopR)listView.getAdapter(), 2, bi.lineId).execute("");
+        new NetworkGet((CA_BRouteResult)listView.getAdapter(), 2, bi.getLineId()).execute("");
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getApplicationContext(), BStopMap.class);
+                Intent intent = new Intent(getApplicationContext(), BStopPlace.class);
+//
+//                //정류소 명 + 번호
+//
+                CBRoute tempBusRoute = (CBRoute)adapter.getItem(i);
 
-                //정류소 명 + 번호
-
-                BusByRoute br = (BusByRoute)adapter.getItem(i);
-
-                intent.putExtra("BStop", (Serializable)br);
-
+                intent.putExtra("BStop", (Serializable)tempBusRoute);
+//
                 startActivity(intent);
             }
         });

@@ -96,6 +96,7 @@ public class XmlPBInfo {
                     }
                 }else {
                     if (eventType == XmlPullParser.TEXT) {
+
                         if (is_buslinenum) {
                             buslinenum = xpp.getText();
                             busList.add(new CBInfo());

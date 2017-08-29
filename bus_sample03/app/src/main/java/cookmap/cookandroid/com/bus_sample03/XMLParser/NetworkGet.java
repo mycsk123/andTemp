@@ -1,6 +1,9 @@
 package cookmap.cookandroid.com.bus_sample03.XMLParser;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.AsyncTask;
+import android.view.LayoutInflater;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -12,7 +15,11 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import cookmap.cookandroid.com.bus_sample03.BNumResult.CA_BNumResult;
+import cookmap.cookandroid.com.bus_sample03.BRouteResult.CA_BRouteResult;
 import cookmap.cookandroid.com.bus_sample03.Data.CBInfo;
+import cookmap.cookandroid.com.bus_sample03.Data.CBRoute;
+import cookmap.cookandroid.com.bus_sample03.Data.CBStop;
+import cookmap.cookandroid.com.bus_sample03.Data.CBStopInfo;
 
 /**
  * Created by 8 on 2017-08-28.
@@ -25,7 +32,13 @@ public class NetworkGet extends AsyncTask<String, Void, String> {
     private String serviceKey;
 
     private CA_BNumResult adapter;
-    //private CuA_BStopR adapterBStopR;
+    private CA_BRouteResult adapterBStopR;
+    ArrayList<CBStopInfo> bsInfoList;
+    ArrayList<CBStop> bsArrList;
+
+    private Activity mAct;
+    Context context;
+    LayoutInflater mInflater;
 
     private String searchbuslinenum;
     private String searchbstoproute;
@@ -45,7 +58,7 @@ public class NetworkGet extends AsyncTask<String, Void, String> {
 
     }
 
-    public NetworkGet(CuA_BStopR adapters, int select, String search){
+    public NetworkGet(CA_BRouteResult adapters, int select, String search){
 
         serviceUrl = "http://data.busan.go.kr/openBus/service/busanBIMS2/";
         serviceKey = "slg7RJ8L%2FCOauR%2FaIz85i2dqPOIbESUB2oT83luBfprZZQy5C5t9gdyOn7FwwPFHMAMpgwZadPce0vCiDFiQLg%3D%3D";
@@ -56,14 +69,29 @@ public class NetworkGet extends AsyncTask<String, Void, String> {
         adapterBStopR = adapters;
 
     }
-//
-//    public NetworkGet(int select, String bstopId, String lineId){
+
+    public NetworkGet(Context context, ArrayList<CBStopInfo> bsInfoList, int select, String bstopnm, String arsno){
+        serviceUrl = "http://data.busan.go.kr/openBus/service/busanBIMS2/";
+        serviceKey = "slg7RJ8L%2FCOauR%2FaIz85i2dqPOIbESUB2oT83luBfprZZQy5C5t9gdyOn7FwwPFHMAMpgwZadPce0vCiDFiQLg%3D%3D";
+        this.select = select;
+
+        URL_Adress = serviceUrl + "busStop?serviceKey=" + serviceKey + "&bstopnm=" + bstopnm + "&arsno=" + arsno;
+
+        this.bsInfoList = bsInfoList;
+
+        this.context = context;
+
+    }
+
+    //ArrayList<CBStop> bsArrList = new ArrayList<CBStop>();
+//    public NetworkGet(ArrayList<CBStop> bsArrList, int select, String bstopId, String lineId){
 //        serviceUrl = "http://data.busan.go.kr/openBus/service/busanBIMS2/";
 //        serviceKey = "slg7RJ8L%2FCOauR%2FaIz85i2dqPOIbESUB2oT83luBfprZZQy5C5t9gdyOn7FwwPFHMAMpgwZadPce0vCiDFiQLg%3D%3D";
 //        this.select = select;
 //
 //        URL_Adress = serviceUrl + "busStopArr?serviceKey=" + serviceKey + "&bstopid=" + bstopId + "&lineid=" + lineId;
 //
+//        this.bsArrList = bsArrList;
 //    }
 
 
@@ -130,35 +158,56 @@ public class NetworkGet extends AsyncTask<String, Void, String> {
                     adapter.notifyDataSetChanged();
                 }
                 break;
-//            case 2:
-//                ArrayList<BusByRoute> routeList = new ArrayList<BusByRoute>();
-//                count = 0;
-//
-//                try{
-//                    count = XmlParserRoute.getBStopRouteXml(s, routeList);
-//                }catch (Exception e){
-//                    e.printStackTrace();
-//                }
-//
-//                if(count == 0){
-//
-//                }else {
-//                    adapterBStopR.setDatas(routeList);
-//                    adapterBStopR.notifyDataSetChanged();
-//                }
-//
-//                break;
-//            case 3:
-//
-//                ArrayList<BStopArrBus> bsArrList = new ArrayList<BStopArrBus>();
-//                count = 0;
-//
-//                try{
-//                    bsArrList = XmlParserBStopArr.getBStopArrXml(s, bsArrList);
-//                }catch (Exception e){
-//                    e.printStackTrace();
-//                }
-//                break;
+            case 2:
+                ArrayList<CBRoute> routeList = new ArrayList<CBRoute>();
+                count = 0;
+                try{
+                    count = XmlPBRoute.getXmlPBRoute(s, routeList);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+                if(count == 0){
+
+                }else {
+                    adapterBStopR.setDatas(routeList);
+                    adapterBStopR.notifyDataSetChanged();
+                }
+
+                break;
+
+            case 3:
+
+                count = 0;
+
+                try{
+                     count = XmlPBStopInfo.getXmlPBStopInfo(s, bsInfoList);
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+                if(count == 0){
+
+                }else{
+
+                }
+
+
+
+                break;
+
+            case 4:
+
+                //ArrayList<CBStop> bsArrList = new ArrayList<CBStop>();
+                count = 0;
+
+                try{
+                    //XmlPBStopInfo.getXmlPBStopInfo(s, bsArrList);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                break;
 
             default:
                 break;

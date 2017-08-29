@@ -1,10 +1,12 @@
 package cookmap.cookandroid.com.bus_sample03.Data;
 
+import java.io.Serializable;
+
 /**
  * Created by 8 on 2017-08-28.
  */
 
-public class CBInfo {
+public class CBInfo implements Serializable {
     private String buslinenum; //버스 번호
     private String bustype; //일반, 마을, 급행
     private String companyid; //회사

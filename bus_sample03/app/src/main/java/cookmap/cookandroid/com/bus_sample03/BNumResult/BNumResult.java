@@ -42,8 +42,6 @@ public class BNumResult extends AppCompatActivity {
 
         new NetworkGet(this, (CA_BNumResult)listView.getAdapter(), 1, tempBNum).execute("");
 
-
-
         btnPrev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

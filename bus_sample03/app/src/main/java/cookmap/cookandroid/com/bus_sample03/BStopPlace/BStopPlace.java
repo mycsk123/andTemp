@@ -51,7 +51,6 @@ public class BStopPlace extends AppCompatActivity implements OnMapReadyCallback 
         tv_min1 = (TextView)findViewById(R.id.tv_min1);
         tv_min2 = (TextView)findViewById(R.id.tv_min2);
 
-
         Intent intent = getIntent();
         br = (CBRoute) intent.getSerializableExtra("BStop");
         String lineId = intent.getStringExtra("selectLinID");
@@ -78,8 +77,6 @@ public class BStopPlace extends AppCompatActivity implements OnMapReadyCallback 
         tv_arsNo.setText(bstopList.get(0).getArsNo());
         tv_min1.setText(bstopList.get(0).getMin1() + "분");
         tv_min2.setText(bstopList.get(0).getMin2() + "분");
-
-
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);

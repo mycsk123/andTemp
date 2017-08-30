@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -59,6 +60,25 @@ public class CA_BNumResult extends BaseAdapter {
         if(view == null)
             view = mInflater.inflate(mListLayout, viewGroup, false);
 
+        final ImageView img_bustype = (ImageView)view.findViewById(R.id.img_bustype);
+        if(mBusInfoObjArr.get(i).getBustype().equals("일반버스")){
+            img_bustype.setImageResource(R.drawable.busstyle01);
+
+        }else if(mBusInfoObjArr.get(i).getBustype().equals("좌석버스")){
+            img_bustype.setImageResource(R.drawable.busstyle02);
+        }else if(mBusInfoObjArr.get(i).getBustype().equals("급행버스")){
+            img_bustype.setImageResource(R.drawable.busstyle04);
+        }else if(mBusInfoObjArr.get(i).getBustype().equals("심야버스")){
+            img_bustype.setImageResource(R.drawable.busstyle05);
+        }else if(mBusInfoObjArr.get(i).getBustype().equals("심야버스(급행)")){
+            img_bustype.setImageResource(R.drawable.busstyle05);
+        }else if(mBusInfoObjArr.get(i).getBustype().equals("마을버스")){
+            img_bustype.setImageResource(R.drawable.busstyle03);
+        }else{
+            img_bustype.setImageResource(R.drawable.busstyle06);
+        }
+
+
         final TextView tvbustype = (TextView)view.findViewById(R.id.tv_bustype);
         tvbustype.setText(mBusInfoObjArr.get(i).getBustype());
 
@@ -75,7 +95,6 @@ public class CA_BNumResult extends BaseAdapter {
 
         final  TextView tvheadwayNorm = (TextView)view.findViewById(R.id.tv_headwayNorm);
         tvheadwayNorm.setText(mBusInfoObjArr.get(i).getHeadwayNorm() + "분");
-
 
         return view;
 

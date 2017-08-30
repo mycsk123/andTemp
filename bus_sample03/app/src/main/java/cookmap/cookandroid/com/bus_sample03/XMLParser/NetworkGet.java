@@ -1,17 +1,16 @@
 package cookmap.cookandroid.com.bus_sample03.XMLParser;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.AsyncTask;
-import android.view.LayoutInflater;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import cookmap.cookandroid.com.bus_sample03.BNumResult.CA_BNumResult;
@@ -35,10 +34,6 @@ public class NetworkGet extends AsyncTask<String, Void, String> {
     private CA_BRouteResult adapterBStopR;
     ArrayList<CBStopInfo> bsInfoList;
     ArrayList<CBStop> bsArrList;
-
-    private Activity mAct;
-    Context context;
-    LayoutInflater mInflater;
 
     private String searchbuslinenum;
     private String searchbstoproute;
@@ -70,17 +65,31 @@ public class NetworkGet extends AsyncTask<String, Void, String> {
 
     }
 
-    public NetworkGet(Context context, ArrayList<CBStopInfo> bsInfoList, int select, String bstopnm, String arsno){
+    public NetworkGet(int select, String bstopnm, String arsno){
         serviceUrl = "http://data.busan.go.kr/openBus/service/busanBIMS2/";
         serviceKey = "slg7RJ8L%2FCOauR%2FaIz85i2dqPOIbESUB2oT83luBfprZZQy5C5t9gdyOn7FwwPFHMAMpgwZadPce0vCiDFiQLg%3D%3D";
         this.select = select;
 
-        URL_Adress = serviceUrl + "busStop?serviceKey=" + serviceKey + "&bstopnm=" + bstopnm + "&arsno=" + arsno;
+        try {
+            //한글일 경우 utf-8로 인코딩해서 넣을 것
+            String tempBstopnm = URLEncoder.encode(bstopnm, "UTF-8");
+            URL_Adress = serviceUrl + "busStop?serviceKey=" + serviceKey + "&bstopnm=" + tempBstopnm + "&arsno=" + arsno;
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        //URL_Adress = serviceUrl + "busStop?serviceKey=" + serviceKey + "&bstopnm=" + bstopnm + "&arsno=" + arsno;
+//        URL_Adress = "http://data.busan.go.kr/openBus/service/busanBIMS2/busStop?serviceKey=slg7RJ8L%2FCOauR%2FaIz85i2dqPOIbESUB2oT83luBfprZZQy5C5t9gdyOn7FwwPFHMAMpgwZadPce0vCiDFiQLg%3D%3D&bstopnm=%EB%B6%80%EC%82%B0%EC%8B%9C%EC%B2%AD&arsno=13045";
 
-        this.bsInfoList = bsInfoList;
 
-        this.context = context;
+    }
 
+    public NetworkGet(String bstopId, String lineid){
+        serviceUrl = "http://data.busan.go.kr/openBus/service/busanBIMS2/";
+        serviceKey = "slg7RJ8L%2FCOauR%2FaIz85i2dqPOIbESUB2oT83luBfprZZQy5C5t9gdyOn7FwwPFHMAMpgwZadPce0vCiDFiQLg%3D%3D";
+
+        //URL_Adress = "http://data.busan.go.kr/openBus/service/busanBIMS2/busStopArr?serviceKey=slg7RJ8L%2FCOauR%2FaIz85i2dqPOIbESUB2oT83luBfprZZQy5C5t9gdyOn7FwwPFHMAMpgwZadPce0vCiDFiQLg%3D%3D&bstopid=193990101&lineid=5200179000";
+
+        URL_Adress = serviceUrl + "busStopArr?serviceKey=" + serviceKey + "&bstopid=" + bstopId + "&lineid=" + lineid;
     }
 
     //ArrayList<CBStop> bsArrList = new ArrayList<CBStop>();
@@ -177,36 +186,21 @@ public class NetworkGet extends AsyncTask<String, Void, String> {
                 break;
 
             case 3:
-
-                count = 0;
-
-                try{
-                     count = XmlPBStopInfo.getXmlPBStopInfo(s, bsInfoList);
-
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-
-                if(count == 0){
-
-                }else{
-
-                }
-
-
-
                 break;
 
             case 4:
 
-                //ArrayList<CBStop> bsArrList = new ArrayList<CBStop>();
-                count = 0;
+//                ArrayList<CBStop> bsArrList = new ArrayList<CBStop>();
+//                count = 0;
+//
+//                try{
+//                    XmlPBStop.getXmlPBStop(s, bsArrList);
+//                }catch (Exception e){
+//                    e.printStackTrace();
+//                }
 
-                try{
-                    //XmlPBStopInfo.getXmlPBStopInfo(s, bsArrList);
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
+
+
                 break;
 
             default:

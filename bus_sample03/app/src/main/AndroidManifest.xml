@@ -21,7 +21,7 @@
             android:value="AIzaSyDxI8hH2SGDTqMhYAwyzf8jwhCMm-Ilie4" />
 
         <!--<activity android:name=".MainActivity">-->
-        <activity android:name=".BStopPlace.BStopPlace">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,7 +30,7 @@
         </activity>
         <activity android:name=".BNumResult.BNumResult" />
         <activity android:name=".BRouteResult.BRouteResult" />
-        <!--<activity android:name=".BStopPlace.BStopPlace"></activity>-->
+        <activity android:name=".BStopPlace.BStopPlace"></activity>
     </application>
 
 </manifest>

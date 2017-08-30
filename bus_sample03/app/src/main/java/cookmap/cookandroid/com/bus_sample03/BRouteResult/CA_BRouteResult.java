@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -63,6 +64,13 @@ public class CA_BRouteResult extends BaseAdapter {
 
         final  TextView tvArsNo = (TextView)view.findViewById(R.id.arsNo);
         tvArsNo.setText(mBusByRouteObjArr.get(i).getArsNo());
+
+        final ImageView imgbstype = (ImageView)view.findViewById(R.id.img_bstype);
+        if(mBusByRouteObjArr.get(i).getCarNo() == null){
+            imgbstype.setImageResource(R.drawable.line01);
+        }else {
+            imgbstype.setImageResource(R.drawable.line02);
+        }
 
         return view;
 

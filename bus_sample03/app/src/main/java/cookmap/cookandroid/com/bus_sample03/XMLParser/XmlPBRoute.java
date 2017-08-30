@@ -124,10 +124,10 @@ public class XmlPBRoute {
                             }
 
                             avgtm = xpp.getText();
-                            routeList.get(routeList.size() - 1).setArsNo(avgtm);
+                            routeList.get(routeList.size() - 1).setAvgtm(avgtm);
 
-                            isAction = false;
                             is_avgtm = false;
+                            isAction = false;
                         }
                         if (is_bstopIdx) {
                             bstopIdx = xpp.getText();

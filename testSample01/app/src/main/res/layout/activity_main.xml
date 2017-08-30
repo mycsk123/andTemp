@@ -12,12 +12,16 @@
         android:layout_height="wrap_content"
         android:id="@+id/btn_popup"/>
 
-
-    <ProgressBar
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/small"
-        style="?android:attr/progressBarStyleSmall"/>
+        android:id="@+id/img"/>
+
+    <!--<ProgressBar-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/small"-->
+        <!--style="?android:attr/progressBarStyleSmall"/>-->
 
     <!--<ProgressBar-->
         <!--android:id="@+android:id/progress"-->

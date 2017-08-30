@@ -128,7 +128,6 @@ public class XmlPBStop {
                         }
                         if(is_bstopId){
                             bstopId = xpp.getText();
-                            bsArrList.add(new CBStop());
                             bsArrList.get(bsArrList.size() - 1).setBstopId(bstopId);
 
                             is_bstopId = false;
@@ -136,28 +135,24 @@ public class XmlPBStop {
                         }
                         if(is_nodeNm){
                             nodeNm = xpp.getText();
-                            bsArrList.add(new CBStop());
                             bsArrList.get(bsArrList.size() - 1).setNodeNm(nodeNm);
 
                             is_nodeNm = false;
                         }
                         if(is_gpsX){
                             gpsX = xpp.getText();
-                            bsArrList.add(new CBStop());
                             bsArrList.get(bsArrList.size() - 1).setGpsX(gpsX);
 
                             is_gpsX = false;
                         }
                         if(is_gpsY){
                             gpsY = xpp.getText();
-                            bsArrList.add(new CBStop());
                             bsArrList.get(bsArrList.size() - 1).setGpsY(gpsY);
 
                             is_gpsY = false;
                         }
                         if(is_bustype){
                             bustype = xpp.getText();
-                            bsArrList.add(new CBStop());
                             bsArrList.get(bsArrList.size() - 1).setBustype(bustype);
 
                             is_bustype = false;
@@ -165,77 +160,66 @@ public class XmlPBStop {
 
                         if(is_lineNo){
                             lineNo = xpp.getText();
-                            bsArrList.add(new CBStop());
                             bsArrList.get(bsArrList.size() - 1).setLineNo(lineNo);
 
                             is_lineNo = false;
                         }
                         if(is_lineid){
                             lineid = xpp.getText();
-                            bsArrList.add(new CBStop());
                             bsArrList.get(bsArrList.size() - 1).setLineid(lineid);
 
                             is_lineid = false;
                         }
                         if(is_bstopidx){
                             bstopidx = xpp.getText();
-                            bsArrList.add(new CBStop());
                             bsArrList.get(bsArrList.size() - 1).setBstopidx(bstopidx);
 
                             is_bstopidx = false;
                         }
                         if(is_carNo1){
                             carNo1 = xpp.getText();
-                            bsArrList.add(new CBStop());
                             bsArrList.get(bsArrList.size() - 1).setCarNo1(carNo1);
 
                             is_carNo1 = false;
                         }
                         if(is_min1){
                             min1 = xpp.getText();
-                            bsArrList.add(new CBStop());
                             bsArrList.get(bsArrList.size() - 1).setMin1(min1);
 
                             is_min1 = false;
                         }
                         if(is_station1){
                             station1 = xpp.getText();
-                            bsArrList.add(new CBStop());
                             bsArrList.get(bsArrList.size() - 1).setStation1(station1);
 
                             is_station1 = false;
                         }
                         if(is_lowplate1){
                             lowplate1 = xpp.getText();
-                            bsArrList.add(new CBStop());
                             bsArrList.get(bsArrList.size() - 1).setLowplate1(lowplate1);
 
                             is_lowplate1 = false;
                         }
                         if(is_carNo2){
                             carNo2 = xpp.getText();
-                            bsArrList.add(new CBStop());
                             bsArrList.get(bsArrList.size() - 1).setCarNo2(carNo2);
 
                             is_carNo2 = false;
                         }
                         if(is_min2){
                             min2 = xpp.getText();
-                            bsArrList.add(new CBStop());
                             bsArrList.get(bsArrList.size() - 1).setMin2(min2);
 
                             is_min2 = false;
                         }
                         if(is_station2){
                             station2 = xpp.getText();
-                            bsArrList.add(new CBStop());
                             bsArrList.get(bsArrList.size() - 1).setStation2(station2);
 
                             is_station2 = false;
                         }
                         if(is_lowplate2){
                             lowplate2 = xpp.getText();
-                            bsArrList.add(new CBStop());
                             bsArrList.get(bsArrList.size() - 1).setLowplate2(lowplate2);
 
                             is_lowplate2 = false;

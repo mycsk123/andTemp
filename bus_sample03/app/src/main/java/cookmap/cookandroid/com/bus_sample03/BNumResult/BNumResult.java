@@ -40,7 +40,9 @@ public class BNumResult extends AppCompatActivity {
         adapter = new CA_BNumResult(this, R.layout.ca_bnumresult, new ArrayList<CBInfo>());
         listView.setAdapter(adapter);
 
-        new NetworkGet((CA_BNumResult)listView.getAdapter(), 1, tempBNum).execute("");
+        new NetworkGet(this, (CA_BNumResult)listView.getAdapter(), 1, tempBNum).execute("");
+
+
 
         btnPrev.setOnClickListener(new View.OnClickListener() {
             @Override

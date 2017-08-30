@@ -36,7 +36,6 @@ public class BStopPlace extends AppCompatActivity implements OnMapReadyCallback 
     Button btnPrev;
     TextView tv_nodeNm, tv_arsNo, tv_min1, tv_min2;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +57,7 @@ public class BStopPlace extends AppCompatActivity implements OnMapReadyCallback 
         String lineId = intent.getStringExtra("selectLinID");
 
         try {
-            String tempUrl = new NetworkGet(3, br.getBstopnm(), br.getArsNo()).execute("").get();
+            String tempUrl = new NetworkGet(this, 3, br.getBstopnm(), br.getArsNo()).execute("").get();
             XmlPBStopInfo.getXmlPBStopInfo(tempUrl, bsInfoList);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -67,7 +66,7 @@ public class BStopPlace extends AppCompatActivity implements OnMapReadyCallback 
         }
 
         try{
-            String tempUrl1 = new NetworkGet(bsInfoList.get(0).getBstopId(), lineId).execute("").get();
+            String tempUrl1 = new NetworkGet(this, bsInfoList.get(0).getBstopId(), lineId).execute("").get();
             XmlPBStop.getXmlPBStop(tempUrl1, bstopList);
         } catch (InterruptedException e) {
             e.printStackTrace();

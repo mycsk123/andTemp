@@ -1,5 +1,7 @@
 package cookmap.cookandroid.com.bus_sample03.XMLParser;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 
 import java.io.BufferedInputStream;
@@ -41,7 +43,12 @@ public class NetworkGet extends AsyncTask<String, Void, String> {
 
     private String URL_Adress;
 
-    public NetworkGet(CA_BNumResult adapters, int select, String search){
+    ProgressDialog progressDialog;
+    Context context;
+
+    public NetworkGet(Context context, CA_BNumResult adapters, int select, String search){
+
+        this.context = context;
 
         serviceUrl = "http://data.busan.go.kr/openBus/service/busanBIMS2/";
         serviceKey = "slg7RJ8L%2FCOauR%2FaIz85i2dqPOIbESUB2oT83luBfprZZQy5C5t9gdyOn7FwwPFHMAMpgwZadPce0vCiDFiQLg%3D%3D";
@@ -53,7 +60,8 @@ public class NetworkGet extends AsyncTask<String, Void, String> {
 
     }
 
-    public NetworkGet(CA_BRouteResult adapters, int select, String search){
+    public NetworkGet(Context context, CA_BRouteResult adapters, int select, String search){
+        this.context = context;
 
         serviceUrl = "http://data.busan.go.kr/openBus/service/busanBIMS2/";
         serviceKey = "slg7RJ8L%2FCOauR%2FaIz85i2dqPOIbESUB2oT83luBfprZZQy5C5t9gdyOn7FwwPFHMAMpgwZadPce0vCiDFiQLg%3D%3D";
@@ -65,7 +73,9 @@ public class NetworkGet extends AsyncTask<String, Void, String> {
 
     }
 
-    public NetworkGet(int select, String bstopnm, String arsno){
+    public NetworkGet(Context context, int select, String bstopnm, String arsno){
+        this.context = context;
+
         serviceUrl = "http://data.busan.go.kr/openBus/service/busanBIMS2/";
         serviceKey = "slg7RJ8L%2FCOauR%2FaIz85i2dqPOIbESUB2oT83luBfprZZQy5C5t9gdyOn7FwwPFHMAMpgwZadPce0vCiDFiQLg%3D%3D";
         this.select = select;
@@ -83,7 +93,9 @@ public class NetworkGet extends AsyncTask<String, Void, String> {
 
     }
 
-    public NetworkGet(String bstopId, String lineid){
+    public NetworkGet(Context context, String bstopId, String lineid){
+        this.context = context;
+
         serviceUrl = "http://data.busan.go.kr/openBus/service/busanBIMS2/";
         serviceKey = "slg7RJ8L%2FCOauR%2FaIz85i2dqPOIbESUB2oT83luBfprZZQy5C5t9gdyOn7FwwPFHMAMpgwZadPce0vCiDFiQLg%3D%3D";
 
@@ -92,27 +104,18 @@ public class NetworkGet extends AsyncTask<String, Void, String> {
         URL_Adress = serviceUrl + "busStopArr?serviceKey=" + serviceKey + "&bstopid=" + bstopId + "&lineid=" + lineid;
     }
 
-    //ArrayList<CBStop> bsArrList = new ArrayList<CBStop>();
-//    public NetworkGet(ArrayList<CBStop> bsArrList, int select, String bstopId, String lineId){
-//        serviceUrl = "http://data.busan.go.kr/openBus/service/busanBIMS2/";
-//        serviceKey = "slg7RJ8L%2FCOauR%2FaIz85i2dqPOIbESUB2oT83luBfprZZQy5C5t9gdyOn7FwwPFHMAMpgwZadPce0vCiDFiQLg%3D%3D";
-//        this.select = select;
-//
-//        URL_Adress = serviceUrl + "busStopArr?serviceKey=" + serviceKey + "&bstopid=" + bstopId + "&lineid=" + lineId;
-//
-//        this.bsArrList = bsArrList;
-//    }
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        //Toast.makeText(context, "다이얼로그 띄우기", Toast.LENGTH_SHORT).show();
+        progressDialog = new ProgressDialog(context);
+        progressDialog.setTitle("검색 중입니다.");
+        progressDialog.setMessage("Loading.....");
+        progressDialog.setProgressStyle(progressDialog.STYLE_SPINNER);
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
 
-
-//    @Override
-//    protected void onPreExecute() {
-//        mDlg = new ProgressDialog(mContext);
-//        mDlg.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-//        mDlg.setMessage("Start");
-//        mDlg.show();
-//
-//        super.onPreExecute();
-//    }
+    }
 
     @Override
     protected String doInBackground(String... strings) {
@@ -166,6 +169,7 @@ public class NetworkGet extends AsyncTask<String, Void, String> {
                     adapter.setDatas(busList);
                     adapter.notifyDataSetChanged();
                 }
+
                 break;
             case 2:
                 ArrayList<CBRoute> routeList = new ArrayList<CBRoute>();
@@ -190,24 +194,13 @@ public class NetworkGet extends AsyncTask<String, Void, String> {
 
             case 4:
 
-//                ArrayList<CBStop> bsArrList = new ArrayList<CBStop>();
-//                count = 0;
-//
-//                try{
-//                    XmlPBStop.getXmlPBStop(s, bsArrList);
-//                }catch (Exception e){
-//                    e.printStackTrace();
-//                }
-
-
-
                 break;
 
             default:
                 break;
         }
 
-
+        progressDialog.dismiss();
 
     }
 
